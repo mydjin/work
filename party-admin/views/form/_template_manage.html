@@ -1,0 +1,76 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    代码
+                </td>
+                <td>
+                    <input required type="text" name="code" maxlength="5" class="form-control"
+                           tips-id="code-tips" data-type="stringcode" onblur="checkRegular(this)"
+                           placeholder="请输入模板代码">
+                </td>
+                <td class="form-item-remark"><span id="code-tips"></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    类型
+                </td>
+                <td>
+                    <select required type="text" name="type" id="type" tips-id="type-tips" data-length="3"
+                            onblur="checkRegular(this);" maxlength="20" class="form-control">
+                        <option value=1>入党申请书模板</option>
+                        <option value=2>思想汇报模板</option>
+                        <option value=3>操作指南</option>
+                    </select>
+                </td>
+                <td class="form-item-remark"><span id="type--tips"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    版本号
+                </td>
+                <td>
+                    <input required type="text" name="versionNumber" id="versionNumber" tips-id="versionNumber-tips"
+                           data-length="20" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入版本号，例如V1.0" data-type="version">
+                </td>
+                <td class="form-item-remark"><span id="versionNumber--tips"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    模板内容
+                </td>
+                <td>
+                    <textarea required type="text" name="detail" id="detail" maxlength="100" class="form-control"
+                              placeholder="请输入模板内容"></textarea>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+
+<script>
+    //日历控件的渲染
+    // laydate.render({
+    //     elem:"#releaseTimeStr"
+    // });
+
+    //如果有多个日历控件则多复制几个，注意分号隔开，如：
+    // laydate.render({
+    //     elem:"#releaseTime2Str"
+    // });
+
+
+    //富文本控件的渲染
+    $(function () {
+        editor.render('#detail');
+        //如有多个富文本，直接在这个方法里加一行即可，如：
+        //editor.render("#content2");
+    })
+
+</script>

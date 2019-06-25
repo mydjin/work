@@ -1,0 +1,427 @@
+<% include ../inc/header.ejs %>
+<link href="../../assets/css/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+<style type="text/css">
+    .table {
+        width: 48%;
+        float: left;
+        margin-left: 20px;
+        text-align: center;
+    }
+</style>
+<% include ../inc/body.ejs %>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title" style="padding: 6px 0 3px 24px !important;background-color: #fff;height:47px;">
+        <div style="width: 200px; display: block;float: left;padding-top: 10px;">
+            修改个人基本信息与详细信息
+        </div>
+    </div>
+    <div class="table-responsive">
+        <form id="opts-form">
+            <table class="table table-striped">
+                <tbody id="personalBaseInfo">
+
+
+                </tbody>
+            </table>
+        </form>
+
+        <form id="opt-form">
+            <table class="table table-striped">
+                <tbody id="personalDetailInfo">
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<script id="baseInfo-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i
+    <it.length;i++){ }}
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            姓名
+        </td>
+        <td>
+            <input required type="text" name="name" id="name" tips-id="name-tips" data-type="name" data-length="20"
+                   maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的姓名" value="{{= it[i].name ||""}}">
+        </td>
+        <td class="form-item-remark" style="width: 40%">*<span style="color:black">必填</span> <span
+                    id="name-tips"></span></td>
+
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            曾用名
+        </td>
+        <td>
+            <input type="text" name="oldName" id="oldName" tips-id="oldName-tips" data-type="name" data-length="20"
+                   maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的曾用名" value="{{=it[i].oldName ||''}}">
+        </td>
+        <td class="form-item-remark"><span id="oldName-tips"></span></td>
+
+    </tr>
+
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            学号/工号
+        </td>
+        <td>
+            <input required type="text" name="number" id="number" tips-id="number-tips" data-length="20"
+                   data-type="number" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的学号/工号" value="{{= it[i].number||''}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="number-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            身份证
+        </td>
+
+        <td>
+            <input required type="text" name="idCard" id="idCard" tips-id="idCard-tips" data-length="18"
+                   data-type="idcard" maxlength="18" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的身份证" value="{{= it[i].idCard ||''}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="idCard-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            手机号
+        </td>
+        <td>
+            <input required type="text" name="phone" id="phone" tips-id="phone-tips" data-type="phone" data-length="11"
+                   maxlength="11" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的手机号" value="{{= it[i].phone ||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="phone-tips"></span></td>
+
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            邮箱
+        </td>
+        <td>
+            <input type="text" name="email" id="email" tips-id="email-tips" data-length="32" data-type="email"
+                   maxlength="32" onblur="checkRegular(this);" class="form-control"
+                   value="{{=it[i].email ||''}}">
+        </td>
+        <td class="form-item-remark"><span id="email-tips"></span></td>
+
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            性别
+        </td>
+        <td>
+            <select required type="text" maxlength="20" id="sex" tips-id="sex-tips" data-length="3"
+                    onblur="checkRegular(this);" name="sex" class="form-control">
+                <option value="">请选择性别</option>
+                {{if(value=it[i].sex == 1){}}
+                <option value="1" selected="selected">女</option>
+                <option value="2">男</option>
+                {{ }else if(value=it[i].sex == 2){ }}
+                <option value="1">女</option>
+                <option value="2" selected="selected">男</option>
+                {{ }else{ }}
+                <option value="1">女</option>
+                <option value="2">男</option>
+                {{ } }}
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="sex-tips"></span></td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            民族
+        </td>
+        <td>
+            <select required type="text" id="nationCode" name="nationCode" class="form-control"
+                    tips-id="nationCode-tips" data-length="20" onblur="checkRegular(this);"
+                    value="{{= it[i].nationName ||""}}">
+
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="nationCode-tips"></span></td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            出生日期
+        </td>
+        <td>
+            <input required type="text" name="birthday" id="birthdayStr" tips-id="birthday-tips"
+                   value="{{= it[i].birthday ||""}}" maxlength="10" data-type="date" onblur="checkRegular(this);"
+            class="form-control"
+            placeholder="请输入您的出生日期">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="birthday-tips"></span></td>
+
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            出生地
+        </td>
+        <td>
+            <input required type="text" name="birthPlace" id="birthPlace" tips-id="birthPlace-tips" data-type="address"
+                   data-length="50" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的出生地" value="{{= it[i].birthPlace ||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="birthPlace-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            现居住地
+        </td>
+        <td>
+            <input required type="text" name="presentPesidence" id="presentPesidence" data-type="address"
+                   tips-id="presentPesidence-tips" data-length="50" maxlength="20" onblur="checkRegular(this);"
+                   class="form-control"
+                   placeholder="请输入您的现居住地" value="{{= it[i].presentPesidence ||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="presentPesidence-tips"></span></td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            籍贯
+        </td>
+        <td>
+            <input required type="text" name="originPlace" id="originPlace" tips-id="originPlace-tips"
+                   data-type="address" data-length="50" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的籍贯" value="{{= it[i].originPlace||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="originPlace-tips"></span></td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            学历
+        </td>
+        <td>
+            <input required type="text" name="graduate" id="graduate" tips-id="graduate-tips" data-type="chinese"
+                   data-length="20" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的学历" value="{{= it[i].graduate||""}}"
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="graduate-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            学位或职称
+        </td>
+        <td>
+            <input required type="text" name="degree" id="degree" tips-id="degree-tips" data-type="chinese"
+                   data-length="20" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的学位或职称" value="{{= it[i].degree||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="degree-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            国籍
+        </td>
+        <td>
+            <select required name="nationality" id="nationality" value="{{= it[i].nationality}}"
+                    tips-id="nationality-tips" data-length="3" onblur="checkRegular(this);" class="form-control">
+                <option value="1">中国</option>
+                <option value="2">海外</option>
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="nationality-tips"></span></td>
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            特长
+        </td>
+
+        <td>
+            <input type="text" name="specialty" id="specialty" tips-id="specialty-tips" data-length="50" maxlength="20"
+                   onblur="checkRegular(this);" class="form-control"
+                   placeholder="请输入您的特长" value="{{= it[i].specialty||""}}">
+        </td>
+        <td class="form-item-remark"><span id="specialty-tips"></span></td>
+
+    </tr>
+
+    <td></td>
+    <td rowspan="2">
+        <!--<button class="btn btn-white" type="button" onclick="personalBaseInfo.resetData(this);" style="margin-right: 40px;">-->
+        <!--<i class="fa fa-refresh"></i>&nbsp;重置-->
+        <!--</button>-->
+
+        <button class="btn btn-primary" type="button" onclick="personalBaseInfo.update(this);">
+            <i class="fa fa-check-square-o"></i>&nbsp;确定
+        </button>
+
+    </td>
+    <td class="form-item-remark"></td>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="detailInfo-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i
+    <it.length;i++){ }}
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            所属学院
+        </td>
+        <td>
+            <select required type="text" name="academyCode" id="academyCode" tips-id="academyCode-tips" data-length="20"
+                    onblur="checkRegular(this);" class="form-control" value="{{= it.academyName}}"
+                    onchange="personalBaseInfo.getSyncByAcademyCode()">
+            </select>
+        </td>
+        <td class="form-item-remark" style="width: 40%" id="academyCode-tips">*<span style="color:black">必填</span>
+            <span></span></td>
+    </tr>
+
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            所属专业
+        </td>
+        <td>
+            <select required type="text" maxlength="20" name="majorCode" id="majorCode" tips-id="majorCode-tips"
+                    data-length="20" onblur="checkRegular(this);" class="form-control">
+                <option value="">请选择专业</option>
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="majorCode-tips"></span></td>
+
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            所属支部
+        </td>
+        <td>
+            <select required type="text" maxlength="20" name="departCode" id="departCode" tips-id="departCode-tips"
+                    data-length="20" onblur="checkRegular(this);" class="form-control">
+                <option value="">请选择支部</option>
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="departCode-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            班级
+        </td>
+        <td>
+            <input required type="text" tips-id="myClass-tips" data-length="20" maxlength="20" data-type="class"
+                   onblur="checkRegular(this);" name="myClass" id="myClass" class="form-control" placeholder="请输入您的班级"
+                   value="{{= it[i].myClass||""}}">
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="myClass-tips"></span></td>
+
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            在读状态
+        </td>
+        <td>
+            <select required type="text" maxlength="20" name="studyStatus" id="studyStatus" class="form-control"
+                    value="{{= it[i].studyStatus}}"
+                    tips-id="studyStatus-tips" data-length="3" onblur="checkRegular(this);"
+            >
+                <option value="0">在读</option>
+                <option value="1">已毕业</option>
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="studyStatus-tips"></span></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="form-item-title">
+            政治面貌
+        </td>
+        <td>
+            <select required name="politicalOutlook" id="politicalOutlook" tips-id="politicalOutlook-tips"
+                    data-length="3" onblur="checkRegular(this);" value="{{= it[i].politicalOutlook}}"
+                    class="form-control">
+                <option value="1">群众</option>
+                <option value="2">共青团员</option>
+                <option value="3">共产党员</option>
+            </select>
+        </td>
+        <td class="form-item-remark">*<span style="color:black">必填</span> <span id="politicalOutlook-tips"></span></td>
+    </tr>
+
+
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<script id="nation-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="">请选择民族</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="academy-template" type="text/x-dot-template">
+
+    {{ if(it.length == 0 ){ }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="" selected="selected">请选择学院</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="major-template" type="text/x-dot-template">
+    {{ if(it.length == 0 ){ }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="" selected="selected">请选择专业</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<script id="depart-template" type="text/x-dot-template">
+    {{ if(it.length == 0 ){ }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="" selected="selected">请选择党支部</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<% include ../inc/js.ejs %>
+
+<!-- 私有脚本 start -->
+<script src="../../js/userModule/_updatePersonalInfo.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

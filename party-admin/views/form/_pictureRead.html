@@ -1,0 +1,50 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    图片名称
+                </td>
+                <td>
+                    <input required type="text" name="name" maxlength="20" class="form-control"
+                           placeholder="请输入图片名称" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    图片描述
+                </td>
+                <td>
+                    <input required type="text" name="describe" maxlength="20" class="form-control"
+                           placeholder="请输入图片描述" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    缩略图路径
+                </td>
+                <td>
+                    <input required type="text" name="thumbnailURL" maxlength="20" class="form-control"
+                           placeholder="请输入缩略图路径" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    原图路径
+                </td>
+                <td>
+                    <input required type="text" name="artworkURL" class="form-control" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    $(function () {
+        editor.render('#artworkURL');
+    })
+</script>

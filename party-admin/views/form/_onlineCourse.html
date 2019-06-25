@@ -1,0 +1,134 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    标题
+                </td>
+                <td>
+                    <input required type="text" name="title" id="title" tips-id="title-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入标题">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="title-tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    主题
+                </td>
+                <td>
+                    <input required type="text" name="topic" id="topic" tips-id="topic-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入主题">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="topic-tips"></span></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    摘要
+                </td>
+                <td>
+                    <input required type="text" name="summary" id="summary" tips-id="summary-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入摘要">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="summary-tips"></span></td>
+
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    封面图片
+                </td>
+                <td>
+                    <img src="" id="faceImageShow" data-path="" src="" class="img-responsive"
+                         width="140px" height="160px" style="display: block;float: left;">
+                    &nbsp;&nbsp;
+                    <button class="btn btn-success btn-upload" type="button" onClick="$('#faceImage').click();">
+                        <i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">上传</span>
+                    </button>
+                    <input type="file" id="faceImage" class="hide"
+                           accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+                           onChange="javascript:opt.upload('faceImage');">
+                    <input type="hidden" required type="text" name="pictureId" id="pictureId" maxlength="20"
+                           class="form-control"
+                           placeholder="请上传图片">
+                </td>
+
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    开始时间
+                </td>
+                <td>
+                    <input required type="text" name="startTime" id="startTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入开始时间" tips-id="startTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="startTime-tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    结束时间
+                </td>
+                <td>
+                    <input required type="text" name="endTime" id="endTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入结束时间" tips-id="endTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="endTime-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    性质
+                </td>
+                <td>
+                    <select required name="property" id="property" tips-id="property-tips" data-length="3"
+                            onblur="checkRegular(this);" class="form-control">
+                        <option value="1">必修</option>
+                        <option value="2">选修</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="property-tips"></span></td>
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    是否精华
+                </td>
+                <td>
+                    <select required name="isEssence" id="isEssence" tips-id="isEssence-tips" data-length="3"
+                            onblur="checkRegular(this);" class="form-control">
+                        <option value="1">精华</option>
+                        <option value="2">非精华</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="isEssence-tips"></span></td>
+
+
+            </tr>
+
+        </table>
+    </form>
+</div>
+<script>
+    laydate.render({
+        elem: "#startTimeStr",
+        type: 'datetime',
+    });
+    laydate.render({
+        elem: "#endTimeStr",
+        type: 'datetime',
+    });
+</script>

@@ -1,0 +1,207 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+
+            <tr>
+                <td class="form-item-title">
+                    主题
+                </td>
+                <td>
+                    <input required type="text" name="topic" id="topic" tips-id="topic-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入主题">
+                </td>
+                <td class="form-item-remark" style="width: 30%">*<span style="color:black">必填</span> <span
+                        id="topic-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    摘要
+                </td>
+                <td>
+                    <input required type="text" name="summary" id="summary" tips-id="summary-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入摘要">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="summary-tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    地点
+                </td>
+                <td>
+                    <input required type="text" name="place" id="place" tips-id="place-tips" data-type="address"
+                           data-length="255" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入地点">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="place-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    位置
+                </td>
+                <td>
+                    <input required style="display: none" type="text" name="position" id="position" placeholder="请选择位置"
+                           maxlength="20" class="form-control" readonly="readonly">
+
+                    <input required type="text" name="remark" id="remark" placeholder="请选择位置" maxlength="20"
+                           class="form-control" readonly="readonly">
+                </td>
+                <td class="form-item-remark">
+                    <button class="btn btn-primary btn-sm" type="button" onclick="schedule.chooseMap(this);">
+                        <i class="fa  fa-map-marker"></i>&nbsp;选择位置
+                    </button>
+                    &nbsp;
+                    *<span style="color:black">必填</span>
+                    <span></span>
+                </td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    分值
+                </td>
+                <td>
+                    <input required type="number" name="score" id="score" tips-id="score-tips" data-type="intcode"
+                           data-length="8" maxlength="8" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入总分值" onkeyup="keyup(this)">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="score-tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    主讲人姓名
+                </td>
+                <td>
+                    <input required type="text" name="speaker" id="speaker" tips-id="speaker-tips" data-type="name"
+                           data-length="50" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入主讲人姓名">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="speaker-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    联系人工号
+                </td>
+                <td>
+                    <input required type="text" name="linkmanNumber" maxlength="20" class="form-control"
+                           data-type="number" date-length="20"
+                           tips-id="number-tip" onchange="checkRegular(this);" onblur="checkRegular(this);"
+                           placeholder="请输入联系人工号/学号">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="number-tip"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    联系电话
+                </td>
+                <td>
+                    <input required type="text" name="linkmanPhone" maxlength="20" class="form-control"
+                           tips-id="phone-tip" data-type="contact" onblur="checkRegular(this)"
+                           placeholder="联系电话">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="phone-tip"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    开始时间
+                </td>
+                <td>
+                    <input required type="text" name="startTime" id="startTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入开始时间" tips-id="startTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="startTime-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    结束时间
+                </td>
+                <td>
+                    <input required type="text" name="endTime" id="endTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入结束时间" tips-id="endTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="endTime-tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    考核形式
+                </td>
+                <td>
+                    <select required type="text" name="checkType" tips-id="checkType-tips" data-length="3"
+                            onblur="checkRegular(this);" maxlength="20" class="form-control"
+                            placeholder="请选择考核形式">
+                        <option value="1">无</option>
+                        <option value="2">心得体会</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="checkType-tips"></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    发布范围
+                </td>
+                <td>
+                    <div id="rangeTree" class="ztree"></div>
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <tr id='note'>
+
+            </tr>
+
+
+            <tr id='push'>
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    修改原因
+                </td>
+                <td>
+                    <input required type="text" name="modifyReason" maxlength="50" class="form-control"
+                           placeholder="请填写修改原因">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<script>
+    laydate.render({
+        elem: "#startTimeStr",
+        type: "datetime"
+    });
+    laydate.render({
+        elem: "#endTimeStr",
+        type: "datetime"
+    });
+</script>
+<script>
+
+    function keyup(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    }
+</script>
+

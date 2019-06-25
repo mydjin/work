@@ -1,0 +1,186 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+<link href="../../assets/js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>思想汇报列表</h5>
+        </div>
+        <div class="ibox-content">
+            <div class="input-group" style="width: 200px; display: flex" id="search-key">
+                <input style="min-width: 200px;width: 200px;height:30px;" type="text" id="select-key"
+                       placeholder="请输入学号/工号" class="input-sm form-control">
+                <span class="input-group-btn" style="float:left;flex: 4">
+                            <button onclick="report.select(this);" id="search_button" style="width: 50px;" type="button"
+                                    class="btn btn-sm btn-primary"> 搜索</button>
+                        </span>
+            </div>
+
+        </div>
+        <div class="ibox-content data-view" style="overflow-y: auto;">
+            <div class="col-sm-12">
+                <div class=" col-sm-12 date-table">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>学号/工号</th>
+                            <th>申请人姓名</th>
+                            <th>审核阶段</th>
+                            <th>次数</th>
+                            <th>提交时间</th>
+                            <th>入党阶段</th>
+                            <th>类型</th>
+                            <th>审核状态</th>
+                            <th>审核结果</th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="item-list">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-12 pages M-box3 list-page">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- html主体代码 end -->
+<!-- 管理的课程模板 -->
+<script id="course-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= ((index-1) * size +i+1)}}
+        </td>
+        <td>
+            {{= it[i].proposerNumber}}
+        </td>
+        <td>
+            {{= it[i].userName}}
+        </td>
+        <td>
+            {{= helper.approvalStage(it[i].approvalStage) }}
+        </td>
+        <td>
+            {{= it[i].count}}
+        </td>
+        <td>
+            {{= it[i].referTimeStr}}
+        </td>
+        <td>
+            {{= helper.stage(it[i].stage) || ""}}
+        </td>
+        <td>
+            {{= helper.type(it[i].type) }}
+        </td>
+        <td>
+            {{= helper.status(it[i].status) }}
+        </td>
+        <td>
+            {{= helper.result(it[i].result) }}
+        </td>
+
+
+        <!--<td>-->
+        <!--{{ if(it[i].status == 2) { }}-->
+
+        <!--<div class="btn-group">-->
+        <!--<button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span-->
+        <!--class="caret"></span>-->
+        <!--</button>-->
+        <!--<ul class="dropdown-menu">-->
+        <!--<li>-->
+        <!--<a href="#" data-id="{{= it[i].id}}" onclick="report.read(this);">查看详情</a>-->
+        <!--</li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--{{ } else  { }}-->
+
+        <!--<div class="btn-group">-->
+        <!--<button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span-->
+        <!--class="caret"></span>-->
+        <!--</button>-->
+        <!--<ul class="dropdown-menu">-->
+        <!---->
+        <!--<li>-->
+        <!--<a href="#" data-id="{{= it[i].id}}" onclick="report.approval(this);">审核</a>-->
+        <!--</li>-->
+        <!---->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--{{ } }}-->
+
+        <!--</td>-->
+        <td>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <!--<li>-->
+                    <!--<a href="#" data-id="{{= it[i].id}}" onclick="report.update(this);">修改</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="#" data-approvalTableId="{{= it[i].approvalTableId}}" data-id="{{=it[i].id }}"
+                           data-stage="{{=it[i].approvalStage}}" onclick="report.read(this);">查看</a>
+                    </li>
+                    {{ if(it[i].status == 1){ }}
+                    <li>
+                        <a href="#" data-approvalTableId="{{= it[i].approvalTableId}}" data-id="{{=it[i].id }}"
+                           data-stage="{{=it[i].approvalStage}}" onclick="report.approval(this);">审核</a>
+                    </li>
+                    {{ } }}
+                    <!--<li>-->
+                    <!--<a href="#" data-id="{{= it[i].id}}" onclick="report.delete(this);">删除</a>-->
+                    <!--</li>-->
+
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+<!-- 管理的审核图片模板 -->
+<script id="pic-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无图片
+    {{ }else{ }}
+    {{ for(var i=0;i
+    <it.length;i++){ }}
+
+    <a class="fancybox" href="{{=it[i].artworkURL}}" onclick="render.alwaysShowImg()">
+
+        <div style="width: 100px;height: 100px;overflow: hidden;float: left;margin: 3px 3px;">
+            <img id="reportImg{{=i}}" data-path="{{=it[i].artworkURL}}" src="{{=it[i].artworkURL}}"
+                 style="width: 100px;height: 100px;overflow: hidden;float: left;margin: 3px 3px;"/>
+        </div>
+    </a>
+    {{ } }}
+    {{ } }}
+</script>
+
+<% include ../inc/js.ejs %>
+
+
+<!-- 私有脚本 start -->
+<script src="../../js/baseModule/_report.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

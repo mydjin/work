@@ -1,0 +1,131 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    标题
+                </td>
+
+                <td>
+                    <input required type="text" name="title" id="title" tips-id="title-tips" data-length="255"
+                           maxlength="40" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入标题">
+                </td>
+                <td class="form-item-remark"><span id="title--tips"></span></td>
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    作者
+                </td>
+                <td>
+                    <input required type="text" name="author" id="author" data-type="name" tips-id="author-tips"
+                           data-length="255" maxlength="50" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入作者">
+                </td>
+                <td class="form-item-remark"><span id="author--tips"></span></td>
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    来源
+                </td>
+                <td>
+                    <input required type="text" name="source" id="source" tips-id="source-tips" data-length="255"
+                           maxlength="50" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入来源">
+                </td>
+                <td class="form-item-remark"><span id="source--tips"></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    公告图片
+                </td>
+                <td>
+                    <!--<img src="" id="faceImageShow" data-path="" class="img-responsive"
+                         width="140px" height="160px" style="display: block;float: left;">-->
+                    <img src="" id="artworkURL" data-path="" class="img-responsive" name="artworkURL"
+                         width="140px" height="160px" style="display: block;float: left;">
+                    &nbsp;&nbsp;
+                    <button class="btn btn-success btn-upload" type="button" onClick="$('#faceImage').click();">
+                        <i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">上传</span>
+                    </button>
+                    <input type="file" id="faceImage" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+                           class="hide" onChange="javascript:opt.upload('faceImage');">
+                    <!--<input name="pictureId" type="hidden" id="pictureId">-->
+
+                    <input type="hidden" required type="text" name="pictureId" id="pictureId" maxlength="20"
+                           class="form-control"
+                           placeholder="请上传图片">
+                </td>
+                <!--<td>-->
+                <!--<input required type="text" name="pictureId" id="pictureId" maxlength="20" class="form-control"-->
+                <!--placeholder="请输入封面图片id">-->
+                <!--</td>-->
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    摘要
+                </td>
+                <td>
+                    <input required type="text" name="summary" id="summary" tips-id="summary-tips" data-length="255"
+                           maxlength="100" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入文章摘要">
+                </td>
+                <td class="form-item-remark"><span id="summary--tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    发布时间
+                </td>
+                <td>
+                    <input required type="text" name="releaseTime" id="releaseTimeStr" tips-id="releaseTime-tips"
+                           data-type="datetime" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入发布时间">
+                </td>
+                <td class="form-item-remark"><span id="releaseTime--tips"></span></td>
+
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    内容
+                </td>
+                <td>
+                    <textarea required type="text" name="content" id="content" class="form-control"
+                              placeholder="请输入内容"></textarea>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+
+<script>
+    //日历控件的渲染
+
+    //如果有多个日历控件则多复制几个，注意分号隔开，如：
+
+    laydate.render({
+        elem: "#releaseTimeStr",
+        type: "datetime"
+    });
+
+    //富文本控件的渲染
+    $(function () {
+            editor.render('#content');
+            //如有多个富文本，直接在这个方法里加一行即可，如：
+        }
+    )
+
+
+</script>

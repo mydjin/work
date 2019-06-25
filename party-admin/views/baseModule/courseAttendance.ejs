@@ -1,0 +1,151 @@
+<!--<script src="../../js/baseModule/_courseAttendance.js"></script>-->
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 140px; display: block;float: left;padding-top: 10px;">
+                    课程考勤管理
+                </div>
+
+                <div class="ibox-tools">
+                    <!--<button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button" onclick="course.template(this);">-->
+                    <!--<i class="fa fa-cloud-download"></i>&nbsp;模板下载-->
+                    <!--</button>-->
+                    <!--<button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button" onclick="course.import(this);">-->
+                    <!--<i class="fa fa-cloud-upload"></i>&nbsp;数据导入-->
+                    <!--</button>-->
+                    <button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button"
+                            onclick="courseAttendance.create(this);">
+                        <i class="fa fa-plus"></i>&nbsp;新增
+                    </button>
+                </div>
+
+            </div>
+            <div class="ibox-content" style="overflow-y: auto;" id="search-key">
+                <div class="input-group" style="width: 200px; display: flex">
+                    <input style="min-min-width: 200px;width: 200px;min-width: 200px;width: 200px;height:30px;"
+                           type="text" id="number" placeholder="请输入学号" class="input-sm form-control">
+                    <span class="input-group-btn" style="float:left;flex: 4">
+                            <button onclick="courseAttendance.select(this);" id="search_button" style="width: 50px;"
+                                    type="button" class="btn btn-sm btn-primary"> 搜索</button>
+                        </span>
+                </div>
+            </div>
+
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>课程主题</th>
+                                <th>考勤时间</th>
+                                <th>学生姓名</th>
+                                <th>学生学号</th>
+                                <th>考勤状态</th>
+                                <!--<th>考勤类型</th>-->
+                                <th>签到方式</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="item-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- html主体代码 end -->
+<!-- 管理的课程考勤模板 -->
+<script id="course-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= ((index-1) * size +i+1)}}
+        </td>
+        <td>
+            {{= it[i].topic}}
+        </td>
+        <td>
+            {{= it[i].attendanceTimeStr||""}}
+        </td>
+        <td>
+            {{= it[i].name||""}}
+        </td>
+        <td>
+            {{= it[i].number}}
+        </td>
+
+        <td>
+            {{= helper.status(it[i].status)}}
+        </td>
+        <!--<td>-->
+        <!--{{= helper.type(it[i].type)}}-->
+        <!--</td>-->
+        <td>
+            {{= helper.way(it[i].way)||""}}
+        </td>
+
+
+        <td>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="courseAttendance.update(this);">修改</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="courseAttendance.read(this);">查看</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="courseAttendance.delete(this);">删除</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+<!--主题下拉框模版-->
+<script id="topic-select-template" type="text/x-dot-template">
+    {{ if(it.length == 0 ){ }}
+    <option value="" placeholder="">暂无待考勤课程</option>
+    {{ }else{ }}
+    <option value=" ">请选择课程主题</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].id }}">{{=it[i].topic}}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<% include ../inc/js.ejs %>
+
+
+<!-- 私有脚本 start -->
+<script src="../../js/baseModule/_courseAttendance.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

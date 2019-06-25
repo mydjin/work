@@ -1,0 +1,47 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    所属学院
+                </td>
+                <td>
+                    <select required type="text" name="academyCode" id="academyCode" tips-id="academyCode-tips"
+                            data-length="20" maxlength="20" onblur="checkRegular(this);" class="form-control">
+
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="academyCode-tips"></span>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    支部代码
+                </td>
+
+                <td>
+                    <input required type="text" name="code" id="code" tips-id="code-tips" data-type="stringcode"
+                           data-length="20" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入支部代码">
+                </td>
+                <td class="form-item-remark"><span id="code--tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    支部名称
+                </td>
+                <td>
+                    <input required type="text" name="name" id="name" tips-id="name-tips" data-type="chinese"
+                           data-length="50" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入支部名称">
+                </td>
+                <td class="form-item-remark"><span id="name--tips"></span></td>
+
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+</script>

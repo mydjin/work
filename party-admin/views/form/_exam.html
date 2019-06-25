@@ -1,0 +1,211 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    试卷名称
+                </td>
+                <td>
+                    <input required type="text" name="name" id="name" tips-id="name-tips" data-length="255"
+                           maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入试卷名称">
+                </td>
+                <td class="form-item-remark"><span id="name--tips"></span></td>
+
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    考试类型
+                </td>
+                <td>
+                    <select required name="type" id="type" class="form-control">
+                        <option value="1">每月一测</option>
+                        <option value="2">结业考试</option>
+                    </select>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <!--
+            <tr>
+                <td class="form-item-title">
+                    考试方式
+                </td>
+                <td>
+                    <select required name="way" id="way" class="form-control">
+                        <option value="1">开放考试</option>
+                        <option value="2">限定考试</option>
+                    </select>
+                </td>
+                <td class="form-item-remark"><span ></span></td>
+            </tr>
+            -->
+            <tr>
+                <td class="form-item-title">
+                    开始时间
+                </td>
+                <td>
+                    <input required type="text" name="startTime" id="startTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入开始时间" tips-id="startTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark"><span id="startTime-tips"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    结束时间
+                </td>
+                <td>
+                    <input required type="text" name="endTime" id="endTimeStr" maxlength="20" class="form-control"
+                           placeholder="请输入结束时间" tips-id="endTime-tips" date-type="datetime"
+                           onblur="checkRegular(this);">
+                </td>
+                <td class="form-item-remark"><span id="endTime-tips"></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    考试时长(分钟)
+                </td>
+                <td>
+                    <input required type="number" name="duration" maxlength="20" class="form-control"
+                           placeholder="请输入考试时长" onkeyup="keyup(this)" value="0" onblur="blurs(this)">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    判断题总分值
+                </td>
+                <td>
+                    <input required type="number" name="trueOrFalse" maxlength="20" class="form-control"
+                           placeholder="请输入判断题总分值"
+                           onkeyup="keyup(this)" onblur="blurs(this)">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    单选题总分值
+                </td>
+                <td>
+                    <input required type="number" name="single" maxlength="20" class="form-control"
+                           placeholder="请输入单选题总分值"
+                           onkeyup="keyup(this)" onblur="blurs(this)">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    多选题总分值
+                </td>
+                <td>
+                    <input required type="number" name="multiple" maxlength="20" class="form-control"
+                           placeholder="请输入多选题总分值"
+                           onkeyup="keyup(this)" onblur="blurs(this)">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    填空题总分值
+                </td>
+                <td>
+                    <input required type="number" name="gap" maxlength="20" class="form-control"
+                           placeholder="请输入填空题总分值"
+                           onkeyup="keyup(this)" onblur="blurs(this)">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    试卷总分值
+                </td>
+                <td>
+                    <input readonly required type="text" id="score" name="score" maxlength="20"
+                           class="form-control" value="0">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    发布范围
+                </td>
+                <td>
+                    <ul id="rangeTree" class="ztree">
+                    </ul>
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr id='note'>
+
+            </tr>
+
+
+            <tr id='push'>
+
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script>
+    laydate.render({
+        elem: "#startTimeStr",
+        min: time.timestamp2time(new Date() / 1000),
+        type: "datetime"
+    });
+    laydate.render({
+        elem: "#endTimeStr",
+        min: time.timestamp2time(new Date() / 1000),
+        type: "datetime"
+    });
+
+</script>
+
+<script>
+
+    function keyup(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+    }
+
+    function blurs(obj) {
+        obj.value = obj.value.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+        obj.value = obj.value.replace(/^\./g, ""); //验证第一个字符是数字
+        obj.value = obj.value.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+        obj.value = obj.value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        obj.value = obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+        if (obj.value == "") {
+            obj.value = 0;
+        }
+    }
+
+
+    $('input[type="number"]').blur(function () {
+        var valueArr = $('input[type="number"]');
+        var sumValue = 0;
+        if (valueArr.size() > 0 || valueArr != null) {
+            for (var i = 0; i < valueArr.size(); i++) {
+                if (isNaN(valueArr[i].value) || valueArr[i].value == null || valueArr[i].value == "") {
+                    sumValue += 0;
+                } else if (valueArr[i].name != "duration") {
+                    sumValue += parseFloat(valueArr[i].value);//强制转换为数字
+                }
+
+            }
+        }
+        if (sumValue > 0) {
+            $('#score').val(parseFloat(sumValue));
+        } else {
+            $('#score').val(0);
+        }
+
+    });
+
+
+</script>

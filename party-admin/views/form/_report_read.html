@@ -1,0 +1,161 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    工号/学号
+                </td>
+                <td>
+                    <input required type="text" name="proposerNumber" id="proposerNumber" maxlength="20"
+                           class="form-control"
+                           placeholder="请输入工号/学号" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    次数
+                </td>
+                <td>
+                    <input required type="text" name="count" id="count" maxlength="20" class="form-control"
+                           placeholder="请输入次数" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    审核内容
+                </td>
+                <td id="info">
+
+                </td>
+
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    提交时间
+                </td>
+                <td>
+                    <input required type="text" name="referTime" id="referTime" maxlength="20" class="form-control"
+                           placeholder="请输入提交时间" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    阶段
+                </td>
+                <td>
+                    <p required type="text" name="stage" id="stage" maxlength="20" class="form-control"
+                       readonly="readonly">
+
+                    </p>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    类型
+                </td>
+                <td>
+                    <p required type="text" name="type" id="type" maxlength="20" class="form-control"
+                       readonly="readonly">
+
+                    </p>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    状态
+                </td>
+                <td>
+                    <p required type="text" name="status" id="status" maxlength="20" class="form-control"
+                       readonly="readonly">
+
+                    </p>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    审核结果
+                </td>
+                <td>
+                    <p required type="text" name="result" id="result" maxlength="20" class="form-control"
+                       readonly="readonly">
+
+                    </p>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    审核意见
+                </td>
+                <td>
+                    <pre name="opinion" id="opinion" readonly="readonly"></pre>
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    审核人工号/学号
+                </td>
+                <td>
+                    <input required type="text" name="approverNumber" id="approverNumber" maxlength="20"
+                           class="form-control" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <!--<tr>-->
+            <!--<td class="form-item-title">-->
+            <!--上版本内容-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<pre required type="text" name="lastContent" id="lastContent"-->
+            <!--placeholder="请输入上版本内容" readonly="readonly"></pre>-->
+            <!--</td>-->
+            <!--<td class="form-item-remark"><span ></span></td>-->
+            <!--</tr>-->
+
+
+        </table>
+    </form>
+</div>
+
+<script>
+    //日历控件的渲染
+    laydate.render({
+        elem: "#referTimeStr"
+    });
+
+    //如果有多个日历控件则多复制几个，注意分号隔开，如：
+    // laydate.render({
+    //     elem:"#releaseTime2Str"
+    // });
+
+
+    //富文本控件的渲染
+    // $(function () {
+    //     editor.render('#content');
+    // //     //如有多个富文本，直接在这个方法里加一行即可，如：
+    //     editor.render("#lastContent");
+    // })
+
+</script>

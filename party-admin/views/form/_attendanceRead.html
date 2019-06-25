@@ -1,0 +1,109 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    会议主题
+                </td>
+                <td>
+                    <input required type="text" name="topic" class="form-control"
+                           placeholder="请输入会议主题" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    考勤时间
+                </td>
+                <td>
+                    <input required type="text" name="attendanceTime" id="attendanceTime" class="form-control"
+                           placeholder="请选择时间" readonly="readonly">
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    学生姓名
+                </td>
+                <td>
+                    <input required type="text" name="name" id="name" maxlength="20" class="form-control"
+                           placeholder="请输入姓名" readonly="readonly">
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    学生学号
+                </td>
+                <td>
+                    <input required type="text" name="number" id="number" class="form-control"
+                           placeholder="请输入学号" readonly="readonly">
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    考勤状态
+                </td>
+                <td>
+                    <p required type="text" name="status" id="status" class="form-control"
+                       readonly="readonly"></p>
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    考勤类型
+                </td>
+                <td>
+                    <p required type="text" name="type" id="type" class="form-control"
+                       readonly="readonly"></p>
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+            <tr id="wayTr" style="display: none">
+                <td class="form-item-title">
+                    签到方式
+                </td>
+                <td>
+                    <p required type="text" name="way" id="way" class="form-control"
+                       readonly="readonly"></p>
+
+                </td>
+                <td class="form-item-remark"><span></span></td>
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+
+<script>
+    //日历控件的渲染
+    // laydate.render({
+    //     elem:"#releaseTimeStr"
+    // });
+
+    //如果有多个日历控件则多复制几个，注意分号隔开，如：
+    // laydate.render({
+    //     elem:"#releaseTime2Str"
+    // });
+
+
+    //富文本控件的渲染
+    // $(function () {
+    //     editor.render('#content');
+    //     //如有多个富文本，直接在这个方法里加一行即可，如：
+    //     //editor.render("#content2");
+    // })
+
+</script>

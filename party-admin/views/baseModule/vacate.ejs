@@ -1,0 +1,113 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 100px; display: block;float: left;padding-top: 10px;">
+                    课程请假管理
+                </div>
+
+            </div>
+            <div class="ibox-content">
+                <div class="input-group" style="width: 200px; display: flex" id="search-key">
+                    <input style="min-width: 200px;width: 200px;height:30px;" type="text" id="select-key"
+                           placeholder="请输入工号/学号" class="input-sm form-control">
+                    <span class="input-group-btn" style="float:left;flex: 4">
+                            <button onclick="vacate.select(this);" id="search_button" style="width: 50px;" type="button"
+                                    class="btn btn-sm btn-primary"> 搜索</button>
+                        </span>
+                </div>
+            </div>
+
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>课程主题</th>
+                                <th>请假人姓名</th>
+                                <th>请假人工号/学号</th>
+                                <th>申请时间</th>
+                                <th>审批状态</th>
+                                <th>审批结果</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="item-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- html主体代码 end -->
+<script id="vacate-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>{{=(i+1)}}</td>
+        <td>{{= it[i].topic}}</td>
+        <td>{{= it[i].name ||""}}</td>
+        <td>{{= it[i].number}}</td>
+        <td>
+            {{= it[i].createTimeStr||"" }}
+        </td>
+        <td>{{= helper.status(it[i].status) }}</td>
+        <td>{{= helper.result(it[i].result) }}</td>
+        <td>
+
+            {{ if(it[i].status == 1) { }}
+
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="vacate.permit(this);">批假</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="vacate.read(this);">查看详情</a>
+                    </li>
+                </ul>
+            </div>
+            {{ }else if(it[i].status == 2){ }}
+
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="vacate.read(this);">查看详情</a>
+                    </li>
+                </ul>
+            </div>
+            {{ } }}
+
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+<% include ../inc/js.ejs %>
+<!-- 私有脚本 start -->
+<script src="../../js/baseModule/_vacate.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

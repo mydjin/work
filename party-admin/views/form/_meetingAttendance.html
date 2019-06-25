@@ -1,0 +1,108 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <span style="color: grey"> 注：只能对已发布的会议进行考勤</span>
+
+        <table class="table table-bordered">
+            <tr>
+                <td class="form-item-title">
+                    会议主题
+                </td>
+                <td>
+                    <select required type="text" name="scheduleId" id="scheduleId" class="form-control"
+                            placeholder="请选择会议主题">
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span></span></td>
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    学生学号
+                </td>
+                <td>
+                    <input required type="text" name="number" id="number" class="form-control"
+                           placeholder="请输入学号" tips-id="user-tips" onblur="existNumber(this)">
+
+                </td>
+                <td class="form-item-remark"><span id="user-tips"></span></td>
+            </tr>
+
+
+            <!--<tr>-->
+            <!--<td class="form-item-title">-->
+            <!--学生姓名-->
+            <!--</td>-->
+            <!--<td>-->
+            <!--<input required type="text" name="name" id="name" maxlength="20" class="form-control"-->
+            <!--placeholder="请输入姓名">-->
+            <!--</td>-->
+            <!--<td class="form-item-remark"><span ></span></td>-->
+            <!--</tr>-->
+
+
+            <tr>
+                <td class="form-item-title">
+                    考勤状态
+                </td>
+                <td>
+                    <select required type="text" name="status" id="status" class="form-control"
+                            onchange="meetingAttendance.selectStatue(this)">
+                        <option value=1>未签到</option>
+                        <option value=2>已签到</option>
+                        <option value=3>已请假</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span></span></td>
+            </tr>
+            <tr id="attendanceTimeTr" style="display: none">
+                <td class="form-item-title">
+                    考勤时间
+                </td>
+                <td>
+                    <input type="text" name="attendanceTime" id="attendanceTimeStr" class="form-control"
+                           placeholder="请选择时间">
+
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span></span></td>
+            </tr>
+            <tr id="wayTr" style="display: none">
+                <td class="form-item-title">
+                    签到方式
+                </td>
+                <td>
+                    <select required type="text" name="way" id="way" class="form-control">
+                        <option value=0 selected>无</option>
+                        <option value=1>二维码</option>
+                        <option value=2>位置定位</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*
+                    <span style="color:black">必填</span> <span></span>
+                </td>
+            </tr>
+
+
+        </table>
+    </form>
+</div>
+
+<script>
+    //日历控件的渲染
+    laydate.render({
+        elem: "#attendanceTimeStr"
+    });
+
+    //如果有多个日历控件则多复制几个，注意分号隔开，如：
+    // laydate.render({
+    //     elem:"#releaseTime2Str"
+    // });
+
+
+    //富文本控件的渲染
+    // $(function () {
+    //     editor.render('#detail');
+    //如有多个富文本，直接在这个方法里加一行即可，如：
+    //editor.render("#content2");
+    // })
+
+</script>

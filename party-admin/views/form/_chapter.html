@@ -1,0 +1,80 @@
+<div class="table-responsive">
+    <form id="opt-form">
+        <table class="table table-bordered">
+            <input type="text" name="courseId" maxlength="50" hidden="hidden">
+
+            <tr>
+                <td class="form-item-title">
+                    章名称
+                </td>
+                <td>
+                    <input required type="text" name="name" id="name" data-type="chinese" tips-id="name-tips"
+                           data-length="200" maxlength="20" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入章名称">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="name-tips"></span></td>
+
+            </tr>
+            <tr>
+                <td class="form-item-title">
+                    章代码
+                </td>
+                <td>
+                    <input required type="text" name="code" id="code" tips-id="code-tips" data-type="stringcode"
+                           data-length="10" maxlength="10" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入章代码">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="code-tips"></span></td>
+            </tr>
+
+
+            <tr>
+                <td class="form-item-title">
+                    排序
+                </td>
+                <td>
+                    <input required type="text" name="sort" id="sort" data-type="intcode" tips-id="sort-tips"
+                           data-length="10" maxlength="10" onblur="checkRegular(this);" class="form-control"
+                           placeholder="请输入序号">
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="sort-tips"></span></td>
+
+            </tr>
+
+            <tr>
+
+
+                <td class="form-item-title">
+                    类型
+                </td>
+                <td>
+                    <select required name="type" id="type" tips-id="type-tips" data-length="3"
+                            onblur="checkRegular(this);" class="form-control">
+                        <option value="">请选择类型</option>
+                        <option value="1">图文</option>
+                        <option value="2">视频</option>
+                    </select>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span id="type-tips"></span></td>
+
+
+            </tr>
+
+            <tr>
+                <td class="form-item-title">
+                    内容
+                </td>
+                <td>
+                    <textarea required type="text" name="content" id="content"
+                              placeholder="请输入内容"></textarea>
+                </td>
+                <td class="form-item-remark">*<span style="color:black">必填</span> <span></span></td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    $(function () {
+        editor.render('#content');
+    })
+</script>

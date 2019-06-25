@@ -1,0 +1,166 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 140px; display: block;float: left;padding-top: 10px;">
+                    新闻管理
+                </div>
+
+                <div class="ibox-tools">
+                    <button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button"
+                            onclick="news.create(this);">
+                        <i class="fa fa-plus"></i>&nbsp;新增
+                    </button>
+                </div>
+
+            </div>
+            <div class="ibox-content">
+                <div class="input-group" style="width: 200px; display: flex" id="search-key">
+                    <input style="width: 200px;height:30px;" type="text" id="select-key" placeholder="请输入标题"
+                           class="input-sm form-control">
+                    <span class="input-group-btn" style="float:left;flex: 4">
+                            <button onclick="news.select(this);" id="search_button" style="width: 50px;" type="button"
+                                    class="btn btn-sm btn-primary"> 搜索</button>
+                        </span>
+                </div>
+            </div>
+
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th style="width:50px;">序号</th>
+                                <th style="width:150px;">新闻标题</th>
+                                <!--<th>类型</th>-->
+                                <th style="width:100px;">封面图片</th>
+                                <th>作者</th>
+                                <th style="width:50px;">来源</th>
+                                <th>新闻摘要</th>
+                                <th style="width:100px;">发布时间</th>
+                                <th style="width:100px;">发布状态</th>
+
+                                <!--    <th>是否需要审核</th>
+                                  <th style="width:100px;">审核状态</th>
+                                  <th>审核人</th>
+                                  <th>置顶状态</th>-->
+                                <th>点击量</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="item-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- html主体代码 end -->
+<!-- 管理的课程模板 -->
+<script id="course-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= ((index-1) * size +i+1)}}
+        </td>
+        <td>
+            {{= it[i].title}}
+        </td>
+        <!--<td>-->
+        <!--{{= helper.type(it[i].type)}}-->
+        <!--</td>-->
+        <td>
+            <img src="{{= it[i].artworkURL ||''}}" class="img-responsive" width="140px" height="160px">
+        </td>
+        <td>
+            {{= it[i].author}}
+        </td>
+        <td>
+            {{= it[i].source}}
+        </td>
+        <td>
+            {{= it[i].summary}}
+        </td>
+        <td>
+            {{= it[i].releaseTimeStr||"" }}
+        </td>
+
+        <td>
+            {{= helper.releaseStatus(it[i].releaseStatus)}}
+        </td>
+        <!--     <td>
+               {{= helper.isNeedAuditing(it[i].isNeedAuditing)}}
+           </td>
+           <td>
+              {{= helper.auditingStatus(it[i].auditingStatus)}}
+           </td>
+           <td>
+               {{= it[i].auditor}}
+           </td>
+           <td>
+               {{= helper.setTopStatus(it[i].setTopStatus)}}
+           </td>
+           -->
+        <td>
+            {{= it[i].hits}}
+        </td>
+        <td>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    {{ if(it[i].releaseStatus == 1){ }}
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="news.release(this);">发布</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="news.update(this);">修改</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="news.delete(this);">删除</a>
+                    </li>
+                    {{ }else if(it[i].releaseStatus == 2){ }}
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="news.update(this);">修改</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="news.delete(this);">删除</a>
+                    </li>
+                    {{ } }}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<% include ../inc/js.ejs %>
+
+<!-- 私有脚本 start -->
+<script src="../../js/articalModule/_news.js"></script>
+
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

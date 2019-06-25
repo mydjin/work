@@ -1,0 +1,116 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 140px; display: block;float: left;padding-top: 10px;">
+                    党员管理
+                </div>
+
+                <div class="ibox-tools">
+                    <!--<button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button" onclick="course.template(this);">-->
+                    <!--<i class="fa fa-cloud-download"></i>&nbsp;模板下载-->
+                    <!--</button>-->
+                    <!--<button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button" onclick="course.import(this);">-->
+                    <!--<i class="fa fa-cloud-upload"></i>&nbsp;数据导入-->
+                    <!--</button>-->
+                    <button style="margin-top: 8px;" class="btn btn-primary btn-xs" type="button"
+                            onclick="attendance.create(this);">
+                        <i class="fa fa-plus"></i>&nbsp;新增
+                    </button>
+                </div>
+
+            </div>
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>考勤时间</th>
+                                <th>学生学号</th>
+                                <th>考勤状态</th>
+                                <th>考勤类型</th>
+                                <th>签到方式</th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="item-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- html主体代码 end -->
+<!-- 管理的课程模板 -->
+<script id="courseAttendance-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= ((index-1) * size +i+1)}}
+        </td>
+        <td>
+            {{= it[i].attendanceTime}}
+        </td>
+        <td>
+            {{= it[i].number}}
+        </td>
+
+        <td>
+            {{= helper.status(it[i].status)}}
+        </td>
+        <td>
+            {{= helper.type(it[i].type)}}
+        </td>
+        <td>
+            {{= helper.way(it[i].way)}}
+        </td>
+
+
+        <td>
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="attendance.update(this);">修改</a>
+                    </li>
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="attendance.delete(this);">删除</a>
+                    </li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+<% include ../inc/js.ejs %>
+
+
+<!-- 私有脚本 start -->
+<script src="../../js/baseModule/_communistManage.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

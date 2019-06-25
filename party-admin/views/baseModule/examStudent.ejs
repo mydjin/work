@@ -1,0 +1,279 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 140px; display: block;float: left;padding-top: 10px;">
+                    考生列表
+                </div>
+
+
+            </div>
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+
+                <div class="input-group" style="width: 200px;display: flex">
+
+                    <select required type="text" name="examId" id="examId" maxlength="20" class="form-control"
+                            style="min-width: 200px;width: 200px;height: 34px;margin-left: 10px">
+                        <option value="">请选择试卷</option>
+
+                    </select>
+
+
+                    <input style="width: 200px;height:34px;" type="text" id="number" placeholder="请输入学号"
+                           class="input-sm form-control">
+
+<!--                     <select required type="text" name="academyCode" id="academyCode" maxlength="20" class="form-control"-->
+<!--                            style="min-width: 200px;width: 200px;height: 34px">-->
+<!--                                            <option value="">请选择学院</option>-->
+<!--                     </select>-->
+
+
+                    <span class="input-group-btn">
+                            <button onclick="examStudent.select(this);" id="search_button"
+                                    style="width: 50px;height: 34px;margin-left: 10px" type="button"
+                                    class="btn btn-sm btn-primary"> 搜索</button>
+
+                          <button onclick="examStudent.export(this);" id="export_button"
+                                  style="width: 50px;height: 34px;margin-left: 10px" type="button"
+                                  class="btn btn-sm btn-primary"> 导出</button>
+                        </span>
+                </div>
+
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped" style="margin-top: 15px;" id="examStudent-table">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>试卷</th>
+                                <th>状态</th>
+                                <th>考场</th>
+                                <th>学院</th>
+                                <th>班别</th>
+                                <th>学号</th>
+                                <th>姓名</th>
+                                <th>得分</th>
+                                <th>提交时间</th>
+                                <th>备注</th>
+                                <th></th>
+
+                            </tr>
+                            </thead>
+                            <tbody id="examStudent-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<table class="table table-striped" style="margin-top: 15px;display: none" id="examStudent-table-hide">
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>试卷</th>
+        <th>考场</th>
+        <th>学院</th>
+        <th>班别</th>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>得分</th>
+        <th>提交时间</th>
+        <th>备注</th>
+
+    </tr>
+    </thead>
+    <tbody id="examStudent-list-hide">
+
+    </tbody>
+</table>
+
+
+<script id="examStudent-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= ((index-1) * size +i+1)}}
+        </td>
+        <td>
+            {{= it[i].examName|| ""}}
+        </td>
+        <td>
+            {{= helper.status(it[i].examStatus)|| ""}}
+        </td>
+        <td>
+            {{= it[i].roomName|| "默认"}}
+        </td>
+        <td>
+            {{= it[i].academyName || ""}}
+        </td>
+        <td>
+            {{= it[i].myClass|| ""}}
+        </td>
+        <td class="td-number">
+            {{= it[i].number || ""}}
+        </td>
+        <td>
+            {{= it[i].name || ""}}
+        </td>
+
+
+        <td class="td-score">
+            {{ if(it[i].status ==2) { }}
+
+            {{= it[i].score||"0"}}
+
+            {{ } }}
+        </td>
+
+        <td class="td-time">
+            {{ if(it[i].status ==2) { }}
+
+            {{= it[i].ansTimeStr||""}}
+
+            {{ }else {  }}
+
+            未考
+
+            {{ } }}
+
+        </td>
+        <td>
+            {{= it[i].remark||""}}
+        </td>
+
+        <td>
+            {{ if(it[i].examStatus !=2) { }}
+
+            <div class="btn-group">
+                <button data-toggle="dropdown" class="btn btn-primary btn-xs dropdown-toggle">操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="examStudent.sync(this);">重置</a>
+                    </li>
+
+                    {{ if(it[i].status ==1) { }}
+                    <li>
+                        <a href="#" data-id="{{= it[i].id}}" onclick="examStudent.unlock(this);">解锁</a>
+                    </li>
+                    {{ } }}
+
+                </ul>
+            </div>
+            {{ } }}
+
+        </td>
+
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="examStudent-export-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>
+            {{= i+1}}
+        </td>
+        <td>
+            {{= it[i].examName|| ""}}
+        </td>
+        <td>
+            {{= it[i].roomName|| "默认"}}
+        </td>
+        <td>
+            {{= it[i].academyName || ""}}
+        </td>
+        <td>
+            {{= it[i].myClass|| ""}}
+        </td>
+        <td class="td-number">
+            {{= it[i].number || ""}}
+        </td>
+        <td>
+            {{= it[i].name || ""}}
+        </td>
+
+        <td class="td-score">
+            {{ if(it[i].status ==2) { }}
+
+            {{= it[i].score||"0"}}
+
+            {{ } }}
+
+        </td>
+
+        <td class="td-time">
+            {{ if(it[i].status ==2) { }}
+
+            {{= it[i].ansTimeStr||""}}
+
+            {{ }else {  }}
+
+            未考
+
+            {{ } }}
+        </td>
+        <td>
+            {{= it[i].remark||""}}
+        </td>
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<script id="academy-select-template" type="text/x-dot-template">
+
+    {{ if(it.length == 0 ){ }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="" selected="selected">请选择学院</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="exam-select-template" type="text/x-dot-template">
+    {{ if(it.length == 0 ){ }}
+    <option value=" ">暂无未发布的试卷</option>
+    {{ }else{ }}
+    <option value=" ">请选择试卷</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].id }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<% include ../inc/js.ejs %>
+
+
+<!-- 私有脚本 start -->
+<script src="../../js/baseModule/_examStudent.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>
