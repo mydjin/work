@@ -1,0 +1,211 @@
+<% include ../inc/header.ejs %>
+<link href="../../assets/css/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+<link href="../../assets/js/summernote/summernote.css" rel="stylesheet">
+<style type="text/css">
+    .table {
+        width: 48%;
+        float: left;
+        margin-left: 20px;
+        text-align: center;
+    }
+</style>
+<% include ../inc/body.ejs %>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title" style="padding: 6px 0 3px 24px !important;background-color: #fff;height:47px;">
+        <div style="width: 200px; display: block;float: left;padding-top: 10px;">
+            修改个人基本信息
+        </div>
+    </div>
+    <div class="table-responsive">
+        <form id="opts-form">
+            <table class="table table-striped">
+                <tbody id="personalBaseInfo">
+
+
+                </tbody>
+            </table>
+        </form>
+
+    </div>
+</div>
+<script id="baseInfo-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i
+    <it.length;i++){ }}
+    <input value="{{= it[i].type||""}}"  type="text" name="type" style="display:none" >
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            姓名
+        </td>
+        <td>
+            <input required type="text" maxlength="20" name="name" class="form-control"
+                   placeholder="请输入您的姓名" value="{{= it[i].name ||""}}">
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            学号/工号
+        </td>
+        <td>
+            <input required type="text" maxlength="20" name="number" id="number" class="form-control"
+                   placeholder="请输入您的学号/工号"
+                   value="{{= it[i].number}}">
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            身份证
+        </td>
+        <td>
+            <input required type="text" maxlength="20" name="idCard" id="idCard" class="form-control"
+                   placeholder="请输入您的身份证" value="{{= it[i].idCard ||''}}">
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            手机号
+        </td>
+        <td>
+            <input required type="text" maxlength="20" name="phone" class="form-control"
+                   placeholder="请输入您的手机号" value="{{= it[i].phone ||""}}">
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            性别
+        </td>
+        <td>
+            <select required type="text" maxlength="20" name="sex" class="form-control">
+                <option value="">请选择性别</option>
+                {{if(value=it[i].sex == 1){}}
+                <option value="1" selected="selected">女</option>
+                <option value="2">男</option>
+                {{ }else if(value=it[i].sex == 2){ }}
+                <option value="1">女</option>
+                <option value="2" selected="selected">男</option>
+                {{ }else{ }}
+                <option value="1">女</option>
+                <option value="2">男</option>
+                {{ } }}
+            </select>
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            民族
+        </td>
+        <td>
+            <input required type="text" id="nationCode" name="nationCode" class="form-control"
+                   value="{{= it[i].nationCode ||""}}">
+
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td width="100px" style="text-align: right;">
+            出生日期
+        </td>
+        <td>
+            <input required type="text" maxlength="20" name="birthday" id="birthdayStr" class="form-control"
+                   value="{{= it[i].birthday ||""}}">
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+    <tr>
+        <td class="form-item-title">
+            政治面貌
+        </td>
+        <td>
+            <select required name="politicalOutlook" id="politicalOutlook" class="form-control">
+                <option value="">请选择政治面貌</option>
+                {{if(value=it[i].politicalOutlook == 1){}}
+                <option value="1" selected="selected">群众</option>
+                <option value="2">共青团员</option>
+                <option value="3">共产党员</option>
+                {{ }else if(value=it[i].politicalOutlook == 2){ }}
+                <option value="1">群众</option>
+                <option value="2" selected="selected">共青团员</option>
+                <option value="3">共产党员</option>
+                {{ }else if(value=it[i].politicalOutlook == 3){ }}
+                <option value="1">群众</option>
+                <option value="2">共青团员</option>
+                <option value="3" selected="selected">共产党员</option>
+                {{ }else{ }}
+                <option value="1">群众</option>
+                <option value="2">共青团员</option>
+                <option value="3">共产党员</option>
+                {{ } }}
+
+            </select>
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+
+    <tr>
+        <td width="100px" style="text-align: right;">
+            所属部门
+        </td>
+        <td>
+            <select required type="text" name="academyCode" id="academyCode" class="form-control"
+                    value="{{= it[i].academyName}}">
+            </select>
+        </td>
+        <td class="form-item-remark">*必填</td>
+    </tr>
+
+
+    <td></td>
+    <td rowspan="2">
+
+        <button class="btn btn-primary" type="button" onclick="personalBaseInfo.update(this);">
+            <i class="fa fa-check-square-o"></i>&nbsp;确定
+        </button>
+
+    </td>
+    <td class="form-item-remark"></td>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<script id="nation-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="">请选择民族</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+<script id="academy-template" type="text/x-dot-template">
+
+    {{ if(it.length == 0 ){ }}
+    <option value="">暂无数据</option>
+    {{ }else{ }}
+    <option value="" selected="selected">请选择部门</option>
+    {{ for(var i = 0 ; i < it.length ; i++){ }}
+    <option value="{{=it[i].code }}">{{=it[i].name }}</option>
+    {{ } }}
+    {{ } }}
+</script>
+
+
+<% include ../inc/js.ejs %>
+
+
+<!-- 私有脚本 start -->
+<script src="../../js/userModule/_updatePersonalInfo.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

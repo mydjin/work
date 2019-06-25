@@ -1,0 +1,123 @@
+<% include ../inc/header.ejs %>
+<style>
+    .date-table {
+        overflow-y: auto;
+    }
+</style>
+
+<% include ../inc/body.ejs %>
+<!-- html主体代码 start -->
+<div class="row">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title" style="padding-top: 3px !important;">
+                <div style="width: 140px; display: block;float: left;padding-top: 10px;">
+                    系统操作记录列表
+                </div>
+                <div class="ibox-content">
+                    <div class="input-group" style="width: 200px; display: flex">
+                        <input style="width: 200px;height:34px;" type="text" id="select-number" placeholder="请输入学号"
+                               class="input-sm form-control">
+
+                        <select style="width: 200px;height:34px;" id="select-server" placeholder="请选择服务器"
+                                class="input-sm form-control">
+                            <option value="">请选择服务器</option>
+                            <option value="">全部</option>
+                            <option value="0">后台</option>
+                            <option value="1">微信端</option>
+                        </select>
+                        <input style="width: 200px;height:34px;" type="text" id="select-control" placeholder="请输入模块"
+                               class="input-sm form-control">
+                        <input style="width: 200px;height:34px;" type="text" id="select-function" placeholder="请输入功能"
+                               class="input-sm form-control">
+                        <input style="width: 200px;height:34px;" type="text" id="select-ip" placeholder="请输入IP"
+                               class="input-sm form-control">
+                        <select id="select-status" style="width: 200px;height:34px;" placeholder="请选择操作状态"
+                                class="input-sm form-control">
+                            <option value="">请选择操作状态</option>
+                            <option value="">全部</option>
+                            <option value="0">成功</option>
+                            <option value="1">失败</option>
+                        </select>
+                        <span class="input-group-btn" style="float:left;flex: 4">
+                            <button onclick="sysOperationRecord.select(this);" id="search_button" style="width: 50px;height: 34px"
+                                    type="button" class="btn btn-sm btn-primary"> 搜索</button>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="ibox-content data-view" style="overflow-y: auto;">
+                <div class="col-sm-12">
+                    <div class=" col-sm-12 date-table">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>操作用户</th>
+                                <th>服务器</th>
+                                <th>模块</th>
+                                <th>功能</th>
+                                <th>操作IP</th>
+                                <th>操作状态</th>
+                                <th>操作时间</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="item-list">
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 pages M-box3 list-page">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- html主体代码 end -->
+<!-- 管理的系统操作记录模板 -->
+<script id="sysOperationRecord-template" type="text/x-dot-template">
+    {{ if(it.length == 0) { }}
+    暂无数据
+    {{ }else{ }}
+    {{ for(var i=0;i < it.length;i++){ }}
+    <tr>
+        <td>{{= ((index-1) * size +i+1)}}</td>
+
+        <td>
+            {{= it[i].number ||""}} （{{= it[i].name||""}}）
+        </td>
+        <td>
+            {{= helper.server(it[i].server)||"" }}
+        </td>
+        <td>
+            {{= it[i].control||""}}
+        </td>
+        <td>
+            {{= it[i].function||""}}
+        </td>
+        <td>
+            {{= it[i].ipAddr||""}}
+        </td>
+        <td>
+            {{= helper.status(it[i].status)||""}}
+        </td>
+        <td>
+            {{= it[i].createTimeStr||"" }}
+        </td>
+
+
+    </tr>
+    {{ } }}
+    {{ } }}
+</script>
+<% include ../inc/js.ejs %>
+
+<!-- 私有脚本 start -->
+<script src="../../js/sysModule/_operationRecord.js"></script>
+<!-- 私有脚本 end -->
+<% include ../inc/footer.ejs %>

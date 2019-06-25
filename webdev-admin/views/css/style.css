@@ -1,0 +1,24 @@
+
+.main {
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    border-top: 1px #cccccc solid;
+
+    padding: 0 0 0 0;
+}
+
+.one {
+    width: 100%;
+    height: 80px;
+    background-size: contain;
+    background-color: #1d2088;
+    font-size: 30px;
+    color: white;
+}
+
+.two {
+    width: 80%;
+    height: 80px;
+    background-size: contain;
+    font-size: 30px;
+}
