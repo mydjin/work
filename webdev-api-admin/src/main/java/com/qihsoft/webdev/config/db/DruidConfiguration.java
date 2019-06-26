@@ -61,8 +61,10 @@ public class DruidConfiguration {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driver);
         druidDataSource.setUrl(url);
-        druidDataSource.setUsername(DESKit.decrypt(username));
-        druidDataSource.setPassword(DESKit.decrypt(password));
+//        druidDataSource.setUsername(DESKit.decrypt(username));
+//        druidDataSource.setPassword(DESKit.decrypt(password));
+        druidDataSource.setUsername(username);
+        druidDataSource.setPassword(password);
         druidDataSource.setInitialSize(initialSize);
         druidDataSource.setMinIdle(minIdle);
         druidDataSource.setMaxActive(maxActive);
