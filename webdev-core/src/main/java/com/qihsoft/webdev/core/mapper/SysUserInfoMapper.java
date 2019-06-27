@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface SysUserInfoMapper extends BaseMapper<SysUserInfo> {
 
+
     @Select("SELECT a.* " +
             "FROM sys_user_info a " +
             "JOIN (SELECT id from sys_user_info where isDel = 0 ${where} " +
