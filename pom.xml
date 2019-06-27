@@ -9,9 +9,11 @@
     <packaging>pom</packaging>
     <version>1.0.1</version>
     <modules>
+
         <module>webdev-api-admin</module>
         <module>webdev-util</module>
         <module>webdev-core</module>
+
     </modules>
 
     <parent>
