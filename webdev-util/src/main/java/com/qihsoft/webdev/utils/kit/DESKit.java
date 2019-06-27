@@ -13,6 +13,7 @@ public class DESKit {
     private final static String DES = "DES";
     private static String key = "00952700";
     /**
+     *
      * Description 根据键值进行加密
      * @param data
      */
