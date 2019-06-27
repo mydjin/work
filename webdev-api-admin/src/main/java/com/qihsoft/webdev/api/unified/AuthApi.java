@@ -181,22 +181,22 @@ public class AuthApi extends BaseApi {
         String ip = getIpAddr(request);
         sysOperationRecord.setIpAddr(ip);
         // 数据验证
-//        String str = cacheKit.getVal(token);
-//        if (V.isEmpty(str))
-//            return R.error("验证码已经过期请重新获取验证码");
-//
-//        JSONObject json = J.s2j(str);
-//        String code = json.getString("code");
-//        System.out.println("code=" + code);
-//        System.out.println("object.getCode()=" + object.getCode());
-//        if (V.isEmpty(code))
-//            return R.error("验证码已经过期请重新获取验证码");
-//        if (V.isEmpty(object.getCode()))
-//            return R.error("请输入验证码");
-//        if (!V.isEqual(code, object.getCode()))
-//            return R.error("您输入的验证码不正确");
-//        if (V.isEmpty(token))
-//            return R.error("请先获取验证码");
+        String str = cacheKit.getVal(token);
+        if (V.isEmpty(str))
+            return R.error("验证码已经过期请重新获取验证码");
+
+        JSONObject json = J.s2j(str);
+        String code = json.getString("code");
+        System.out.println("code=" + code);
+        System.out.println("object.getCode()=" + object.getCode());
+        if (V.isEmpty(code))
+            return R.error("验证码已经过期请重新获取验证码");
+        if (V.isEmpty(object.getCode()))
+            return R.error("请输入验证码");
+        if (!V.isEqual(code, object.getCode()))
+            return R.error("您输入的验证码不正确");
+        if (V.isEmpty(token))
+            return R.error("请先获取验证码");
         if (V.isEmpty(object.getLoginName()))
             return R.error("请输入登录名");
         if (V.isEmpty(object.getPassword()))
@@ -272,6 +272,7 @@ public class AuthApi extends BaseApi {
 
             // 密码处理
             String salt = user.getString("salt");
+            //String pwd = MD5Kit.encode(object.getPassword() + salt);
             String pwd = MD5Kit.encode(object.getPassword() + salt);
 
             //密码错误
