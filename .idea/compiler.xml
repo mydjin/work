@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="webdev-api-admin" />
         <module name="webdev-core" />
         <module name="webdev-util" />
+        <module name="webdev-api-admin" />
       </profile>
     </annotationProcessing>
   </component>
