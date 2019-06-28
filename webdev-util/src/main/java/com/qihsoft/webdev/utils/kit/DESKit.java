@@ -2,6 +2,9 @@ package com.qihsoft.webdev.utils.kit;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+//import java.util.Base64.Decoder;
+//import java.util.Base64.Encoder;
+
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -38,6 +41,8 @@ public class DESKit {
             }
             BASE64Decoder decoder = new BASE64Decoder();
             byte[] buf = decoder.decodeBuffer(data);
+
+            byte[] buf = decoder.decode(data);
             byte[] bt = decrypt(buf,key.getBytes());
             return new String(bt);
         }catch (Exception ex){
